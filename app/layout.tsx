@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import Footer from "@/components/Footer";
+import { ReactQueryProvider } from "@/components/ReactQueryProvider";
+import Navbar from "@/components/Navbar";
+import { ClerkProvider } from "@clerk/nextjs";
+import Image from "next/image";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,12 +30,55 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    <html className="scroll-smooth" lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200;1,200&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <ClerkProvider
+        signInUrl="/sign-in"
+        signInFallbackRedirectUrl="/upload"
+        appearance={{ variables: { colorPrimary: "#fe5933" } }}
       >
-        {children}
-      </body>
+        <body
+          className={`bg-background ${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ReactQueryProvider>
+              <div className="z-50 fixed bottom-4 right-4 w-16 h-auto sm:w-20 md:w-24 lg:w-28">
+                <Link href="https://bolt.new">
+                  <Image
+                    src="/bolt.svg"
+                    alt="Bolt logo"
+                    width={120}
+                    height={40}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                    }}
+                  />
+                </Link>
+              </div>
+              <Navbar />
+              {children}
+              <Footer />
+            </ReactQueryProvider>
+          </ThemeProvider>
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
