@@ -1,19 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import FileUpload from "@/components/FileUpload";
-import AnalysisProgress from "@/components/AnalysisProgress";
 import {
   GameLogFile,
   AnalysisResult,
   AnalysisProgress as AnalysisProgressType,
 } from "@/types";
-// import { simulateAnalysis } from "@/utils/mockData";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import { FeatureStepsDemo } from "@/components/FeatureSection";
 import { useMutation } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
-import { Progress } from "@/components/ui/progress";
 import { useAnalyzeStore } from "@/stores/analyzeStore";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
@@ -23,7 +20,6 @@ function App() {
   useEffect(() => {
     setIsVisible(true);
   }, []);
-  const [selectedFile, setSelectedFile] = useState<GameLogFile | null>(null);
   const [analysisProgress, setAnalysisProgress] =
     useState<AnalysisProgressType>({
       step: "",
@@ -38,7 +34,7 @@ function App() {
 
   const router = useRouter();
 
-  const { isAnalyzing, setAnalyzeData, setCurrentDashboardId } =
+  const { setAnalyzeData, setCurrentDashboardId } =
     useAnalyzeStore();
 
   //FILE UPLOAD KO LAGI AND CALLING API
@@ -75,7 +71,6 @@ function App() {
   });
 
   const handleFileSelect = (file: GameLogFile) => {
-    setSelectedFile(file);
     setAnalysisResult(null);
 
     // Start analysis simulation

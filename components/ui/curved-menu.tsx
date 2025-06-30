@@ -3,7 +3,7 @@ import React, { useState, useRef } from "react";
 
 import { motion, useMotionValue, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Linkedin, Github, Dribbble, Figma, Youtube } from "lucide-react";
+import { Github, Figma, Youtube } from "lucide-react";
 
 interface iNavItem {
   heading: string;

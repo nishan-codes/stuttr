@@ -1,17 +1,13 @@
 "use client";
-// import { Button } from "@/components/ui/button";
 import { AnalysisResult } from "@/types";
 import ResultsDashboard from "../ResultsDashboard";
 import { useAnalyzeStore } from "@/stores/analyzeStore";
-// import { BGPattern } from "@/components/bg-pattern";
-import { useParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { getDashboard, saveDashboard } from "@/lib/actions/actions";
+import { saveDashboard } from "@/lib/actions/actions";
 import Dialog03 from "@/components/dialog-1";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave";
-import { Progress } from "@/components/ui/progress";
 import { motion } from "framer-motion";
 
 const Dashboard = ({ initialData }) => {
