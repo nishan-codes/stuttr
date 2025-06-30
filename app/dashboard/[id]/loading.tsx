@@ -1,4 +1,3 @@
-import { Progress } from '@/components/ui/progress'
 import { TextShimmerWave } from '@/components/ui/text-shimmer-wave'
 import React from 'react'
 
